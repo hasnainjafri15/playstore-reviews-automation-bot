@@ -1,4 +1,5 @@
 from ast import Break, Return
+from asyncio.windows_events import NULL
 from functools import total_ordering
 from gettext import install
 import re
@@ -18,19 +19,19 @@ driver.get("https://play.google.com/store/apps/developer?id=Blink+Co.")
 
 time.sleep(22)
 
-#reviews_list = []
+none = [0,0,0,0,0]
 
 df_price = pd.DataFrame()
 
 x = 0
-while x in range(20):
+while x in range(3):
     reviews_list = []
     x = x + 1
     try:
         app_link = driver.find_element_by_xpath('/html/body/div[1]/div[4]/c-wiz/div/div[2]/c-wiz/c-wiz/c-wiz/div/div[2]/div[{}]/c-wiz/div/div/div[2]/div/div/div[1]/div/div/div[1]/a/div'.format(x))
         app_link.click()
     except:
-     pass
+        pass
 
     time.sleep(2)
 
@@ -44,7 +45,7 @@ while x in range(20):
            #time.sleep(2)
            #print(y)
            #driver.execute_script("window.scrollBy(0,3000)", "")
-           try:
+            try:
                 reviews = driver.find_element_by_xpath(
                     '/html/body/div[1]/div[4]/c-wiz[2]/div/div[2]/div/div/main/div/div[1]/div[{}]/div/div[2]/div[2]/span[1]'.format(y)).text
                 reviews_list.append(reviews)
@@ -55,10 +56,10 @@ while x in range(20):
     time.sleep(2)
 
     df_price[x] = pd.DataFrame(reviews_list)
-    #df_price['sentiment'] = pd.DataFrame()
+    df_price['sentiment'] = none
 
 
 driver.quit()
 
 
-df_price()
+df_price
